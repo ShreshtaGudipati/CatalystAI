@@ -22,3 +22,22 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Environment and dependencies
+.venv/
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Databases & Local Data
+db/
+*.sqlite3
+
+# IDE settings
+.vscode/
+.idea/
+
+# Environment variables
+.env
