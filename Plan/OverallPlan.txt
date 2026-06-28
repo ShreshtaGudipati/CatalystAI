@@ -1,0 +1,905 @@
+FIRST 3 HOURS PLAN
+Think of it as six small meetings.
+Hour 1
+↓
+
+Business Design
+
+↓
+
+Hour 1.5
+
+Architecture Design
+
+↓
+
+Hour 2
+
+AI Workflow Design
+
+↓
+
+Hour 2.5
+
+API & JSON Design
+
+↓
+
+Hour 3
+
+Repository + Task Division
+
+STEP 1 (20-30 minutes)
+Finalize the Business Story
+This is extremely important because every later decision depends on it.
+Don't say
+AI analyzes startups.
+Instead define the complete workflow.
+For your project:
+User uploads
+
+↓
+
+Pitch Deck
+
+↓
+
+AI performs Due Diligence
+
+↓
+
+Collects evidence
+
+↓
+
+Analyzes
+
+↓
+
+Finds risks
+
+↓
+
+Finds opportunities
+
+↓
+
+Recommends next actions
+
+↓
+
+Human approves
+
+↓
+
+Stores decision
+Now define exactly what your demo shows.
+
+Demo Scenario
+Suppose
+A VC analyst receives
+Startup:
+HealthAI
+Documents
+Pitch Deck
+Founder Resume
+Financial Projection
+Market Report
+Goal
+Should we invest?
+Simple.
+Everyone now understands the project.
+
+STEP 2 (30 minutes)
+Whiteboard the Entire Architecture
+Draw this.
+              React
+
+                │
+
+         Upload Pitch Deck
+
+                │
+
+                ▼
+
+            FastAPI
+
+                │
+
+                ▼
+
+         Planner Agent
+
+                │
+
+     ┌──────────┼───────────┐
+
+     ▼                       ▼                      ▼
+
+Founder              Financial            Market
+
+Agent                Agent                 Agent
+
+     ▼                    ▼                      ▼
+
+          		 Risk Agent
+
+               			 ▼
+
+     			Recommendation Agent
+
+              			  ▼
+
+      			 Human Approval
+
+             			   ▼
+
+         			Database
+
+
+No coding.
+Only architecture.
+
+Discuss
+Who talks to whom?
+What is input?
+What is output?
+
+STEP 3 (40 minutes)
+Design Every Agent
+This is YOUR part.
+Don't write code.
+Write
+For every agent
+
+
+Purpose
+
+
+Input
+
+
+Output
+Example
+
+Planner Agent
+Purpose
+Decides which agents to call.
+Input
+PitchDeck
+Uploaded Files
+User Request
+Output
+Run
+Founder Agent
+Financial Agent
+Market Agent
+Risk Agent
+
+Founder Agent
+Purpose
+Evaluate founders.
+Input
+Founder profile
+Pitch deck
+Output
+Founder Score
+Experience
+Strengths
+Weaknesses
+
+Evidence
+
+Financial Agent
+Input
+Financial statements
+Output
+Burn Rate
+Revenue
+Runway
+Financial Score
+
+Do this for
+Market Agent
+Pitch Deck Agent
+Risk Agent
+Recommendation Agent
+Memory Agent
+Now coding becomes easy.
+
+STEP 4 (30 minutes)
+Design JSON
+This is the MOST IMPORTANT step.
+Everything uses this.
+Example
+{
+ "startup_name": "",
+
+ "industry": "",
+
+ "recommendation": "",
+
+ "confidence": 0,
+
+ "summary": "",
+
+ "founder": {
+
+     "score": 0,
+
+     "strengths": [],
+
+     "weaknesses": []
+
+ },
+
+ "financial": {
+
+     "score":0,
+
+     "burn_rate":"",
+
+     "runway":""
+
+ },
+
+ "market": {
+
+     "score":0,
+
+     "market_size":""
+
+ },
+
+ "risks":[
+
+ ],
+
+ "opportunities":[
+
+ ],
+
+ "next_best_actions":[
+
+ ],
+
+ "missing_information":[
+
+ ],
+
+ "evidence":[
+
+ ]
+}
+Now
+Frontend knows
+what to display.
+Backend knows
+what to return.
+AI knows
+what to generate.
+
+STEP 5 (20 minutes)
+Design APIs
+Don't code.
+Just decide.
+POST /upload
+Returns
+document_id
+
+POST /analyze
+Returns
+Entire JSON.
+
+POST /approve
+Stores
+Approval.
+
+GET /history
+Returns
+Previous decisions.
+
+Everyone now agrees.
+
+STEP 6 (30 minutes)
+Decide Folder Structure
+Don't randomly create files later.
+Decide now.
+Example
+CatalystAI
+
+frontend
+
+backend
+
+backend/
+
+   routes/
+
+   ai/
+
+       graph.py
+
+       planner.py
+
+       prompts.py
+
+       state.py
+
+       memory.py
+
+       agents/
+
+           founder.py
+
+           market.py
+
+           financial.py
+
+           risk.py
+
+           recommendation.py
+
+       tools/
+
+           pdf.py
+
+           retrieval.py
+
+           websearch.py
+
+database
+
+docs
+
+sample_data
+
+STEP 7 (20 minutes)
+Decide Prompt Strategy
+Don't write prompts.
+Only decide.
+Planner Prompt
+↓
+Founder Prompt
+↓
+Financial Prompt
+↓
+Market Prompt
+↓
+Risk Prompt
+↓
+Recommendation Prompt
+Each agent has
+its own prompt.
+
+STEP 8 (20 minutes)
+Decide Demo Dataset
+This saves HOURS.
+Instead of finding random startups later.
+Pick
+ONE startup.
+Example
+HealthAI
+or
+FinPilot AI
+Prepare
+Pitch Deck
+Founder Profile
+Financial Statement
+Market Report
+Meeting Notes
+Everything revolves around ONE startup.
+
+STEP 9 (15 minutes)
+Assign Work
+Example
+You
+Planner
+LangGraph
+Agents
+Memory
+Prompts
+Recommendation
+
+Member 2
+Backend
+APIs
+Upload
+Database
+Integration
+
+Member 3
+React
+Dashboard
+Cards
+Charts
+Evidence
+History
+
+Notice
+Nobody waits.
+
+
+STEP 10 (10 minutes)
+GitHub Setup
+Repository
+CatalystAI
+Create branches
+main
+
+frontend
+
+backend
+
+ai
+Everyone clones.
+Everyone switches to their own branch.
+Done.
+
+
+
+
+
+
+
+ok next phase plan
+This is where the real development begins. If the first 3 hours were the "Architect Phase", the next phase is the "Core Engine Phase."
+Since your project is an Agentic AI Platform, I would change the order from the original plan.
+Instead of
+Frontend → Backend → AI
+I recommend
+AI Core → Backend Integration → Frontend Integration
+Why?
+Because your project is judged 70% on Agentic AI architecture. If your AI pipeline is working, everything else becomes displaying its output.
+
+PHASE 2 (Hours 4–8)
+Goal
+At the end of this phase, you should be able to do this:
+Upload Pitch Deck
+
+↓
+
+Planner Agent
+
+↓
+
+Specialized Agents
+
+↓
+
+Recommendation JSON
+
+↓
+
+POST /analyze API
+
+↓
+
+Frontend receives JSON
+Even if the UI is plain, this is a working MVP.
+
+Overall Execution
+Stage 2
+
+AI Core
+
+↓
+
+Backend APIs
+
+↓
+
+Frontend Integration
+
+↓
+
+Testing
+Everyone works in parallel.
+
+YOUR ROLE (AI Team Lead)
+This is the biggest part.
+
+STEP 1
+Create the LangGraph State
+Every agent shares one state.
+Example
+class DecisionState(TypedDict):
+
+   uploaded_documents: list
+
+   startup_profile: dict
+
+   founder_analysis: dict
+
+   financial_analysis: dict
+
+   market_analysis: dict
+
+   risk_analysis: dict
+
+   recommendation: dict
+
+   evidence: list
+
+   confidence: float
+
+   messages: list
+This state travels through the graph.
+
+STEP 2
+Create Planner Agent
+Don't create analysis agents first.
+Create Planner first.
+Planner decides
+Input Documents
+
+↓
+
+What information exists?
+
+↓
+
+What agents are needed?
+
+↓
+
+Return execution plan
+Example
+Pitch Deck only
+
+↓
+
+Planner
+
+↓
+
+Run
+
+PitchDeck Agent
+
+Founder Agent
+
+Market Agent
+Suppose Financial Statement isn't uploaded.
+Planner skips Financial Agent.
+This demonstrates dynamic orchestration.
+
+STEP 3
+Build One Agent Completely
+Don't create six half-working agents.
+Finish one.
+Example
+PitchDeck Agent
+Input
+Pitch Deck
+Output
+{
+"problem":"",
+"solution":"",
+"customers":"",
+"business_model":"",
+"traction":""
+}
+Once one agent works,
+clone the structure.
+
+STEP 4
+Build Remaining Agents
+Recommended order
+PitchDeck Agent
+
+↓
+
+Founder Agent
+
+↓
+
+Market Agent
+
+↓
+
+Financial Agent
+
+↓
+
+Risk Agent
+
+↓
+
+Recommendation Agent
+Don't worry about Memory yet.
+
+STEP 5
+Standardize Every Agent Output
+Every agent should return
+{
+
+score,
+
+summary,
+
+strengths,
+
+weaknesses,
+
+evidence
+
+}
+Now Recommendation Agent becomes easy.
+
+STEP 6
+Recommendation Agent
+This is where everything comes together.
+Input
+Founder
+
+Financial
+
+Market
+
+Risk
+Output
+{
+
+recommendation:
+
+confidence:
+
+next_actions:
+
+reasoning:
+
+missing_information:
+
+}
+
+STEP 7
+Dissent Engine
+One thing I absolutely love about your idea is
+Instead of
+Why Invest?
+Also ask
+Why NOT Invest?
+Output
+Possible concerns
+
+Weak market traction
+
+Competition
+
+Founder dependency
+
+Regulatory uncertainty
+Judges love balanced reasoning.
+
+STEP 8
+Evidence Engine
+Never say
+Revenue growing.
+Instead
+Revenue growing
+
+Evidence
+
+Slide 12
+
+ARR ₹4 Cr
+
+120% YoY
+Everything needs evidence.
+This matches the hackathon.
+
+STEP 9
+Confidence Score
+Instead of
+random confidence
+calculate
+Founder Score
+
+30%
+
+Financial
+
+25%
+
+Market
+
+20%
+
+Risk
+
+15%
+
+Product
+
+10%
+Weighted average.
+Much more convincing.
+
+BACKEND PERSON
+Backend starts immediately.
+
+Build APIs
+POST /upload
+
+POST /analyze
+
+POST /approve
+
+GET /history
+Initially
+/analyze
+returns
+dummy JSON.
+Later
+replace
+with AI.
+
+File Upload
+Save
+Pitch Deck
+
+↓
+
+uploads/
+
+↓
+
+Database
+Return
+Document ID.
+
+FRONTEND PERSON
+They don't wait.
+Use
+Mock JSON.
+Build
+Dashboard
+Analysis Cards
+Recommendation Screen
+Evidence Table
+History
+Approval
+All using fake JSON.
+Later
+replace with API.
+
+Integration
+After AI works
+Backend changes
+return mock_json
+to
+return ai_output
+Frontend doesn't change.
+
+How Everyone Helps the AI Pipeline
+This is important.
+You asked
+Can everyone contribute?
+Yes.
+Example
+
+You
+Planner
+LangGraph
+State
+Graph
+Memory
+Routing
+
+Backend
+Creates Tools
+PDF Loader
+
+Retriever
+
+Web Search
+
+Database
+
+Embedding Store
+These become LangGraph Tools.
+
+Frontend
+Designs JSON visualization.
+Sometimes frontend suggests
+Need confidence score
+
+Need evidence
+
+Need citations
+Now AI changes output.
+So frontend also influences AI.
+
+Git Strategy During This Phase
+Repository
+main
+
+frontend
+
+backend
+
+ai
+Suppose
+You finish Planner.
+Commit.
+git add .
+
+git commit -m "Planner Agent completed"
+
+git push origin ai
+Backend
+git commit -m "Upload API completed"
+Frontend
+git commit -m "Recommendation dashboard"
+Nobody touches main.
+
+End of Phase 2
+By Hour 8, you should have this flow working:
+Upload Startup Pitch Deck
+         │
+         ▼
+    FastAPI Upload
+         │
+         ▼
+    Planner Agent
+         │
+         ▼
+ PitchDeck Agent
+         │
+         ▼
+Founder Agent
+         │
+         ▼
+Financial Agent
+         │
+         ▼
+Market Agent
+         │
+         ▼
+Risk Agent
+         │
+         ▼
+Recommendation Agent
+         │
+         ▼
+ Structured JSON Response
+         │
+         ▼
+     React Frontend
+Even if Memory and History are not finished yet, this is already a convincing end-to-end demo.
+
+I would make one major improvement to the original plan
+Instead of hardcoding the sequence:
+Planner
+↓
+Founder
+↓
+Financial
+↓
+Market
+↓
+Risk
+I would implement a true dynamic Planner.
+For example:
+User uploads:
+✓ Pitch Deck
+✓ Founder Resume
+
+Planner decides:
+→ Run PitchDeck Agent
+→ Run Founder Agent
+→ Skip Financial Agent (no financial documents)
+→ Skip Market Agent (insufficient data)
+→ Run Missing Information Agent
+Then the Recommendation Agent outputs:
+Next Best Actions
+Request financial statements.
+Ask for customer traction metrics.
+Schedule founder interview.
+This demonstrates exactly what XL Ventures is asking for: dynamic planner-based orchestration, missing information detection, and next best action recommendations, rather than a fixed AI pipeline. I think this single design choice will make your project feel significantly more "agentic" than most other submissions.
+
+
+
+

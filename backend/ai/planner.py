@@ -1,49 +1,72 @@
 from typing import List
-from pydantic import BaseModel, Field
-from langchain_core.prompts import ChatPromptTemplate
-# --- NEW GOOGLE IMPORT ---
-from langchain_google_genai import ChatGoogleGenerativeAI
 from backend.ai.state import AgentState
-
-class PlannerOutput(BaseModel):
-    agents_to_run: List[str] = Field(
-        description="List of agent names to execute. Options: 'pitch_deck_agent', 'founder_agent', 'financial_agent', 'market_agent', 'risk_agent'"
-    )
+from backend.database import db
 
 def planner_agent(state: AgentState) -> AgentState:
-    print("🧠 Planner Agent: Analyzing uploaded documents...")
+    print("[Planner] Analyzing uploaded documents and searching memory...")
     
-    documents = state.get("uploaded_documents", {})
-    doc_summary = "\n".join([f"- {doc_name}" for doc_name in documents.keys()])
+    # 1. Infer startup info from documents or use defaults
+    uploaded_docs = state.get("uploaded_documents", {})
+    startup_name = state.get("startup_name", "")
+    industry = state.get("industry", "")
+    stage = state.get("startup_stage", "Seed")
     
-    # --- NEW GEMINI SETUP ---
-    # Using 'gemini-1.5-flash' because the planner needs to be fast and cheap
-    llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", temperature=0)
-    structured_llm = llm.with_structured_output(PlannerOutput)
+    # Fallback/default logic for demo purposes
+    if not startup_name:
+        startup_name = "HealthAI"
+    if not industry:
+        # Infer industry from document names if possible
+        doc_names = "".join(uploaded_docs.keys()).lower()
+        if "health" in doc_names or "medical" in doc_names:
+            industry = "Healthcare"
+        elif "finance" in doc_names or "fintech" in doc_names:
+            industry = "Fintech"
+        else:
+            industry = "Healthcare"  # Default demo industry
+            
+    print(f"[Planner] Identified Startup: {startup_name} | Industry: {industry} | Stage: {stage}")
     
-    system_prompt = """You are the orchestration engine for a Venture Capital Due Diligence platform.
-    Your job is to look at the documents provided by the user and decide which analysis agents need to run.
+    # 2. Query History/Memory for similar cases first (Memory runs first!)
+    similar_cases = db.search_memories(industry)
+    print(f"[Planner] Retrieve Memory: Found {len(similar_cases)} similar past investments in {industry}")
     
-    Available Agents and Triggers:
-    - 'pitch_deck_agent': Run if a pitch deck, presentation, or business plan is uploaded.
-    - 'founder_agent': Run if a resume, LinkedIn profile, or team document is uploaded.
-    - 'financial_agent': Run if financial statements, cap tables, or projections (Excel/CSV) are uploaded.
-    - 'market_agent': Run if a market research report or competitor analysis is uploaded.
-    - 'risk_agent': ALWAYS run this agent last to evaluate the findings."""
+    # 3. Dynamic Orchestration based on present files
+    agents_to_run = ["risk_agent"]  # Always run risk agent
     
-    user_prompt = """User uploaded the following documents:
-    {doc_summary}
+    doc_keys = [k.lower() for k in uploaded_docs.keys()]
     
-    Return ONLY the list of agents that should execute."""
+    # Check for pitch deck
+    if any("pitch" in k or "deck" in k for k in doc_keys) or len(uploaded_docs) == 0:
+        agents_to_run.append("pitchdeck_agent")
+    else:
+        print("Planner: Pitch deck missing. Skipping PitchDeck Agent.")
+        
+    # Check for founder files
+    if any("resume" in k or "team" in k or "profile" in k for k in doc_keys) or len(uploaded_docs) == 0:
+        agents_to_run.append("founder_agent")
+    else:
+        print("Planner: Resumes missing. Skipping Founder Agent.")
+        
+    # Check for financial files
+    if any("financial" in k or "projection" in k or "csv" in k for k in doc_keys) or len(uploaded_docs) == 0:
+        agents_to_run.append("financial_agent")
+    else:
+        print("Planner: Financial projections missing. Skipping Financial Agent.")
+        
+    # Check for market reports
+    if any("market" in k or "report" in k for k in doc_keys) or len(uploaded_docs) == 0:
+        agents_to_run.append("market_agent")
+    else:
+        print("Planner: Market reports missing. Skipping Market Agent.")
+        
+    print(f"[Planner] Decided to execute: {agents_to_run}")
     
-    # We now pass both the system instructions and the human input
-    prompt = ChatPromptTemplate.from_messages([
-        ("system", system_prompt),
-        ("human", user_prompt)
-    ])
-    
-    chain = prompt | structured_llm
-    result = chain.invoke({"doc_summary": doc_summary})
-    
-    print(f"🎯 Planner decided to route to: {result.agents_to_run}")
-    return {"agents_to_run": result.agents_to_run}
+    return {
+        "startup_name": startup_name,
+        "industry": industry,
+        "startup_stage": stage,
+        "agents_to_run": agents_to_run,
+        "similar_cases": similar_cases,
+        "evidence": [],
+        "agents_executed": ["planner_agent"]
+    }

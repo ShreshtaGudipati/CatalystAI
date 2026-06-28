@@ -1,0 +1,807 @@
+
+
+Front end plan:
+I would restructure the frontend like this
+Login
+
+↓
+
+Dashboard
+
+↓
+
+Create Decision
+
+↓
+
+Live Analysis  ⭐
+
+↓
+
+Decision Case
+
+       Overview
+
+       Agent Pipeline ⭐
+
+       Findings
+
+       Evidence
+
+       Sources
+
+       Confidence
+
+       Dissent
+
+       Recommendation
+
+       Next Best Actions ⭐
+
+       Missing Information ⭐
+
+       Executive Summary
+
+       Approval
+
+       History
+
+↓
+
+Knowledge Base
+
+↓
+
+Memory Center ⭐
+
+↓
+
+Evidence Explorer
+
+↓
+
+Analytics
+
+↓
+
+Settings
+Notice
+Everything follows
+Upload
+
+↓
+
+Planner
+
+↓
+
+Agents
+
+↓
+
+Evidence
+
+↓
+
+Decision
+
+↓
+
+Approval
+
+↓
+
+Learning
+which is exactly your LangGraph graph.
+
+COMPLETE FRONTEND PLAN
+I'll describe every page.
+Think of this as the UI Specification.
+
+1 Login
+Simple.
+No time waste.
+
+Components
+Company Logo
+Email
+Password
+Remember Me
+Sign In
+Forgot Password
+Gradient Background
+Glass Card
+
+Future
+SSO
+Microsoft Login
+Google Login
+(Not needed)
+
+2 Dashboard
+Purpose
+Executive Overview
+
+Top Metrics
+Use
+meta
+decision
+history
+Total Decisions
+
+Pending Reviews
+
+Approved
+
+Rejected
+
+Average Confidence
+
+Average Risk
+
+Memory Hits ⭐
+
+Agents Executed Today ⭐
+
+Knowledge Sources Used ⭐
+
+Recent Decisions
+Startup
+
+Recommendation
+
+Confidence
+
+Date
+
+Status
+
+AI Activity
+Planner Runs
+
+Today's Agents
+
+Average Execution Time
+
+Memory Retrievals
+
+Evidence Collected
+
+Charts
+Confidence Trend
+Industry Distribution
+Decision Distribution
+Risk Distribution
+
+Quick Actions
+Create Decision
+Upload Documents
+Open Last Case
+Knowledge Base
+
+3 Create Decision
+This page should NOT ask users to manually fill business details.
+AI should infer them.
+
+Form
+Decision Name
+Decision Type
+(Default Startup Due Diligence)
+Upload
+Pitch Deck
+Founder Resume
+Financial Report
+Market Report
+Optional
+Meeting Notes
+Emails
+Additional Docs
+Industry
+Investment Stage
+Analyze Button
+
+When clicking Analyze
+↓
+Redirect
+Live Analysis
+
+4 Live Analysis ⭐⭐⭐⭐⭐
+This is probably the most impressive page.
+Most hackathon teams won't have it.
+
+Purpose
+Visualize LangGraph execution.
+
+Top
+Planner
+
+Reading Documents...
+
+Timeline
+Planner
+
+↓
+
+PitchDeck Agent
+
+Running
+
+↓
+
+Founder Agent
+
+Completed
+
+↓
+
+Financial Agent
+
+Running
+
+↓
+
+Market Agent
+
+Waiting
+
+↓
+
+Risk Agent
+
+Completed
+
+↓
+
+Recommendation
+
+Pending
+
+Each node shows
+Status
+
+Execution Time
+
+Confidence
+
+Output Summary
+
+Right Side
+Live Logs
+Planner selected Founder Agent.
+
+Founder Agent finished.
+
+Financial Agent started.
+
+Risk detected.
+
+Recommendation generating...
+This page alone screams
+Agentic AI.
+
+5 Decision Case
+Main page.
+Tabs.
+
+Overview
+General Information.
+
+Show
+Startup Name
+Industry
+Current Stage
+Recommendation
+Confidence
+Decision Status
+Agents Executed
+(meta.agents_executed)
+
+Progress
+Upload
+
+↓
+
+Planner
+
+↓
+
+Analysis
+
+↓
+
+Recommendation
+
+↓
+
+Approval
+
+↓
+
+Complete
+
+Agent Pipeline ⭐⭐⭐⭐⭐
+Missing in your friend's design.
+
+Cards
+Planner
+Founder Agent
+Financial Agent
+Market Agent
+Risk Agent
+Recommendation Agent
+
+Each card
+Status
+
+Runtime
+
+Input
+
+Output
+
+Confidence
+
+Evidence Count
+
+If Planner skipped
+Market Agent
+Show
+Skipped
+
+Reason
+
+No market report uploaded.
+Amazing for judges.
+
+Findings
+Use
+analysis
+
+Separate sections
+Founder
+Financial
+Market
+
+Founder Card
+Score
+
+Strengths
+
+Weaknesses
+Financial
+Burn Rate
+
+Runway
+
+Financial Score
+Market
+Market Size
+
+Score
+Exactly matches JSON.
+
+Intelligence
+Very important.
+Use
+intelligence
+
+Sections
+Risks
+Red Flags
+Opportunities
+
+Each card
+Severity
+Agent
+Evidence Count
+
+Evidence
+Use
+evidence
+
+Every evidence
+Claim
+
+Source Document
+
+Agent
+
+Open Source
+Exactly JSON.
+
+Sources
+Uploaded documents
+Preview
+Version
+Checksum
+Document Type
+Status
+
+Confidence
+Don't use one gauge.
+Use
+Overall
+
+
+Per Agent
+Overall
+
+85%
+
+Founder
+
+91%
+
+Financial
+
+74%
+
+Market
+
+88%
+
+Risk
+
+82%
+Much more explainable.
+
+Dissent
+Excellent page.
+Split
+Why Invest
+Why Not Invest
+Show
+Red Flags
+Warnings
+Unknowns
+
+Recommendation
+Large Card
+Use
+decision
+
+Show
+Recommendation
+Summary
+Confidence
+Reason
+
+Then
+Next Best Actions
+Use
+intelligence.next_best_actions
+Example
+Verify customer contracts
+
+Schedule founder interview
+
+Review legal compliance
+
+Proceed to investment committee
+This directly satisfies hackathon.
+
+Missing Information ⭐⭐⭐⭐⭐
+Huge page.
+Use
+missing_information
+Cards
+Missing Financial Report
+
+Importance
+
+Critical
+
+Action
+
+Request Upload
+This shows
+AI knows what it doesn't know.
+Very impressive.
+
+Executive Summary
+Print Friendly.
+Everything summarized.
+One click
+Export PDF
+
+Approval
+Buttons
+Approve
+Reject
+Needs Review
+Comments
+Timeline
+
+Before Approve
+Show
+Recommendation
+
+Confidence
+
+Reason
+
+Risks
+
+Missing Information
+
+History
+Timeline
+Previous Decisions
+Previous Outcomes
+Previous Recommendations
+Approvals
+
+Memory Center ⭐⭐⭐⭐⭐
+Hackathon explicitly asks
+Memory.
+Need page.
+
+Sections
+Past Similar Startups
+Patterns Learned
+Historical Decisions
+Retrieved Memories
+Memory Updated
+
+Example
+Startup
+
+HealthAI
+
+Previous Similar
+
+MediFlow
+
+Outcome
+
+Successful Investment
+
+Pattern
+
+Healthcare AI grows fast.
+
+Knowledge Base
+Purpose
+Enterprise Knowledge.
+
+Collections
+Investment Playbooks
+Policies
+Past Deals
+Templates
+Documents
+Upload
+Semantic Search
+
+Evidence Explorer
+Search
+Filter
+Evidence Cards
+Highlight
+Open Document
+
+Analytics
+Executive dashboard.
+
+Charts
+Recommendation Distribution
+Confidence Trend
+Industry
+Agent Usage
+Decision Time
+Risk
+Memory Hits
+
+Settings
+Workspace
+Theme
+Team
+API
+Models
+Notifications
+
+COMPONENTS
+I would build reusable components.
+Layout
+
+Sidebar
+
+Navbar
+
+Breadcrumb
+
+PageHeader
+
+Cards
+
+StatCard
+
+FindingCard
+
+RiskCard
+
+RecommendationCard
+
+EvidenceCard
+
+AgentCard ⭐
+
+MemoryCard ⭐
+
+ActionCard ⭐
+
+TimelineCard
+
+Charts
+
+ConfidenceGauge
+
+PipelineChart ⭐
+
+RiskChart
+
+Forms
+
+UploadArea
+
+SearchBar
+
+FilterBar
+
+Stepper
+
+Tables
+
+EvidenceTable
+
+HistoryTable
+
+SourcesTable
+
+Dialogs
+
+ApproveModal
+
+RejectModal
+
+Loading
+
+Skeleton
+
+ProgressOverlay
+
+AgentRunningAnimation ⭐
+
+API Mapping
+This is where your frontend connects beautifully.
+Dashboard
+GET /history
+
+Create
+POST /upload
+
+Analyze
+POST /analyze
+Returns
+Exactly
+{
+
+meta
+
+decision
+
+analysis
+
+intelligence
+
+evidence
+
+}
+Nothing else.
+
+Approval
+POST /approve
+
+History
+GET /history
+
+JSON Mapping
+This is the most important thing.
+Everything on the frontend should come directly from the agreed JSON.
+JSON Field
+Frontend Location
+meta.startup_name
+Dashboard, Overview Header, Executive Summary
+meta.industry
+Dashboard, Overview
+meta.agents_executed
+Agent Pipeline, Dashboard AI Activity
+decision.recommendation
+Recommendation, Dashboard, History
+decision.confidence_score
+Confidence Page, Dashboard, Executive Summary
+decision.summary
+Recommendation, Executive Summary
+analysis.founder
+Findings → Founder
+analysis.financial
+Findings → Financial
+analysis.market
+Findings → Market
+intelligence.risks
+Intelligence, Dissent
+intelligence.opportunities
+Intelligence
+intelligence.red_flags
+Dissent
+intelligence.next_best_actions
+Recommendation, Next Best Actions
+intelligence.missing_information
+Missing Information
+evidence[]
+Evidence Explorer, Findings, Recommendation
+
+
+Final UI Flow
+Login
+   │
+   ▼
+Dashboard
+   │
+   ▼
+Create Decision
+   │
+   ▼
+Upload Documents
+   │
+   ▼
+Live AI Analysis (Planner + Agent Execution)
+   │
+   ▼
+Decision Case
+   ├── Overview
+   ├── Agent Pipeline
+   ├── Findings
+   ├── Intelligence
+   ├── Evidence
+   ├── Sources
+   ├── Confidence
+   ├── Dissent
+   ├── Recommendation
+   ├── Next Best Actions
+   ├── Missing Information
+   ├── Executive Summary
+   ├── Approval
+   └── History
+   │
+   ▼
+Memory Center
+   │
+   ▼
+Knowledge Base
+   │
+   ▼
+Analytics
+One final recommendation
+If you have only two days, don't try to fully implement every page. Instead, prioritize them in this order:
+Tier 1 (Must Have)
+Dashboard
+Create Decision
+Live AI Analysis
+Decision Case (Overview, Findings, Evidence, Recommendation, Approval)
+Agent Pipeline
+Tier 2 (Should Have)
+Confidence
+Dissent
+Next Best Actions
+Missing Information
+Executive Summary
+Tier 3 (Nice to Have)
+Memory Center
+Analytics
+Knowledge Base
+Evidence Explorer
+Settings
+This way, even if you run out of time, your demo still showcases the entire agentic workflow—Planner → Agents → Evidence → Recommendation → Human Approval—which is the core of what XL Ventures is evaluating.
+
+

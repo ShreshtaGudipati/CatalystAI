@@ -1,0 +1,917 @@
+First, what is Venture Capital?
+Suppose you have a startup.
+You build an AI application.
+You need ₹5 Crores to grow.
+Where do you get the money?
+One option is to approach an investment company like XL Ventures.
+You present your idea.
+This presentation is called a Pitch.
+The presentation slides are called a Pitch Deck.
+Now XL Ventures has to decide
+Should we invest in this startup or not?
+They don't decide in 5 minutes.
+They spend days collecting information.
+This entire evaluation process is called Due Diligence.
+
+What is Due Diligence?
+Think of it like buying a used car.
+Before buying, you check
+Engine
+Tyres
+Service history
+Accidents
+Documents
+Only after checking everything do you buy it.
+Companies do exactly the same thing before investing.
+Instead of checking a car,
+they check a startup.
+
+What do they check?
+Imagine this startup:
+HealthAI
+AI platform for hospitals.
+Founder says
+"We will become India's largest healthcare AI company."
+Sounds amazing.
+But investors don't believe words.
+They verify.
+They ask questions.
+
+Question 1
+Is the idea good?
+Suppose the startup wants to build
+AI for hospitals.
+Investor asks
+Is there demand?
+How many hospitals need this?
+Are people already buying similar software?
+Is the market growing?
+This is called
+Market Analysis
+
+Example
+AI Agent searches
+Healthcare reports
+Government reports
+Competitor websites
+Industry trends
+Output
+Healthcare AI market
+
+Growing 24% every year.
+
+Strong demand.
+
+Positive indicator.
+
+Question 2
+Are the founders capable?
+Suppose
+Founder A
+worked at Google.
+Founder B
+built two successful startups.
+Founder C
+has 15 years healthcare experience.
+Very good.
+Now another startup
+Founder
+College student
+No technical experience
+No business experience
+No healthcare knowledge
+Investor becomes cautious.
+This is
+Founder Evaluation
+
+AI Agent checks
+LinkedIn
+Previous companies
+Experience
+Skills
+Previous startups
+Patents
+Then gives
+Founder Score
+
+Question 3
+Is the business financially healthy?
+Investor checks
+Revenue
+Expenses
+Profit
+Cash
+Runway
+Burn Rate
+
+Suppose
+Revenue
+₹50 lakh/month
+Expenses
+₹45 lakh/month
+Good.
+Now another company
+Revenue
+₹5 lakh/month
+Expenses
+₹60 lakh/month
+Problem.
+This is
+Financial Assessment
+
+Agent reads
+Excel
+Balance Sheet
+Revenue reports
+Bank statements
+Forecast
+
+Question 4
+Is the market crowded?
+Suppose startup says
+"We have no competitors."
+Impossible.
+Agent searches
+Google
+Crunchbase
+News
+Reports
+Finds
+15 competitors.
+Now investor knows
+Competition is high.
+
+This is
+Competitive Analysis
+
+Question 5
+What are the risks?
+Suppose
+Company depends on
+one customer.
+If customer leaves
+company dies.
+Risk.
+Another example
+Founder has legal case.
+Risk.
+No patents.
+Risk.
+No revenue.
+Risk.
+Technology copied easily.
+Risk.
+This is
+Risk Analysis
+
+Agent identifies
+Business Risks
+Technical Risks
+Legal Risks
+Financial Risks
+Market Risks
+Operational Risks
+
+Now combine everything.
+Imagine
+Startup submits
+Pitch Deck
+↓
+Financial Report
+↓
+Founders Profile
+↓
+Product Demo
+↓
+Customer Feedback
+↓
+Emails
+↓
+Meeting Notes
+↓
+Now your platform starts.
+
+Step 1
+Planner Agent
+Planner sees
+Input includes
+Pitch Deck
+
+Meeting Notes
+
+Founder Profiles
+
+Financial Statements
+
+Customer Feedback
+Planner decides
+Which agents should work?
+Not every agent.
+Only required ones.
+
+Example
+Planner decides
+Pitch Deck Agent
+
+↓
+
+Founder Agent
+
+↓
+
+Financial Agent
+
+↓
+
+Market Agent
+
+↓
+
+Risk Agent
+
+↓
+
+Recommendation Agent
+This is why the hackathon specifically asks for a Planner Agent—it dynamically chooses which specialist agents are needed for the current case rather than running everything every time.
+
+Step 2
+Pitch Deck Agent
+Reads
+Entire Pitch Deck
+Extracts
+Problem
+
+Solution
+
+Business Model
+
+Revenue Model
+
+Customers
+
+Technology
+
+Funding Ask
+
+Step 3
+Founder Agent
+Reads
+LinkedIn
+Resumes
+Past startups
+Experience
+Education
+Network
+Output
+Founder Score
+
+Step 4
+Financial Agent
+Reads
+Revenue
+Expenses
+Growth
+Burn Rate
+Runway
+Funding History
+Output
+Financial Health
+
+Step 5
+Market Agent
+Reads
+Industry Reports
+Competitor Analysis
+Market Size
+Growth Rate
+Customer Demand
+Output
+Market Opportunity
+
+Step 6
+Risk Agent
+Looks at everything.
+Produces
+Risk
+
+Founder dependency
+
+Legal issues
+
+Competition
+
+Cash runway
+
+Technology risk
+
+Regulatory issues
+
+Step 7
+Recommendation Agent
+Combines
+all previous outputs.
+Produces
+Recommendation
+
+Invest
+
+or
+
+Reject
+
+or
+
+Needs More Information
+Not only that,
+it explains
+WHY.
+Example
+Recommendation
+
+Proceed to Due Diligence Phase 2
+
+Confidence
+
+91%
+
+Reason
+
+Excellent founders
+
+Growing market
+
+Strong revenue
+
+Only concern
+
+Customer concentration risk.
+This directly satisfies the hackathon's requirement for explainable recommendations with supporting evidence and confidence.
+
+Step 8
+Human Approval
+Now AI doesn't invest automatically.
+Investment Partner reviews.
+Clicks
+Approve
+Reject
+Needs Review
+This matches the Human-in-the-Loop requirement in the PDF.
+
+Step 9
+Memory
+Suppose
+AI recommended
+Invest.
+Partner rejected.
+Reason
+Legal issue discovered later.
+Next time
+AI remembers
+Whenever startup has pending litigation
+
+Increase risk score.
+Now your system learns.
+That satisfies the shared memory and learning from previous interactions requirements.
+
+Why is this actually reusable?
+This is the most important point.
+Many people think
+"This is only for Venture Capital."
+No.
+The workflow is universal.
+Think about the pattern:
+Receive Documents
+       ↓
+Collect More Context
+       ↓
+Analyze Information
+       ↓
+Find Risks
+       ↓
+Find Opportunities
+       ↓
+Recommend Action
+       ↓
+Human Approval
+       ↓
+Store Learning
+Now replace the domain.
+Insurance
+Claim documents → Fraud analysis → Approve/Reject claim
+Banking
+Loan application → Credit analysis → Approve/Reject loan
+Procurement
+Vendor proposal → Vendor analysis → Select supplier
+Healthcare
+Patient records → Clinical analysis → Recommend treatment plan (doctor approves)
+HR
+Candidate profile → Skill analysis → Hire/Reject candidate
+The planner, memory, retrieval, explainability, and approval flow remain exactly the same. Only the specialist agents and business rules change.
+
+Why I think this is a strong demo for XL Ventures
+There is another reason I like this idea.
+You're applying for an internship at XL Ventures.
+If your demo shows how their own analysts or investment team could use an Agentic AI platform to speed up startup evaluation, it becomes immediately relatable to the judges.
+At the same time, during the presentation you can say:
+"Although our demonstration is in Venture Capital, the platform itself is domain-agnostic. By replacing the domain-specific agents and knowledge sources, the same architecture supports loan approvals, procurement decisions, insurance claims, hiring, and other enterprise decision workflows."
+That statement aligns very closely with the hackathon's emphasis on a reusable Agentic Decision Intelligence Platform rather than a one-off application.
+
+
+
+
+
+First: Don't think of this as three independent people.
+Think of it as three layers.
+               Frontend
+                   ▲
+                   │
+               REST APIs
+                   ▲
+                   │
+              AI Platform
+                   ▲
+                   │
+              Knowledge/Data
+Everything revolves around the AI Platform.
+
+Question 1
+Can everyone contribute to the AI pipeline?
+Yes.
+In fact, I recommend everyone contributes.
+Don't make AI the responsibility of only one person.
+Instead split the AI pipeline itself.
+
+AI Pipeline
+Instead of
+Member 2
+↓
+
+Entire AI
+Do this
+AI Pipeline
+
+↓
+
+Planner
+
+↓
+
+Knowledge Retrieval
+
+↓
+
+Analysis Agents
+
+↓
+
+Recommendation
+
+↓
+
+Memory
+
+↓
+
+Human Approval
+Now divide these.
+
+You (Member 2)
+Agent Orchestration
+You build
+Planner Agent
+LangGraph Workflow
+State
+Routing
+Memory
+Agent communication
+Example
+Planner
+
+↓
+
+Pitch Deck Agent
+
+↓
+
+Financial Agent
+
+↓
+
+Founder Agent
+
+↓
+
+Market Agent
+
+↓
+
+Risk Agent
+
+↓
+
+Recommendation
+This is the heart of the project.
+
+Member 3
+Instead of only backend
+they also build
+Tools
+For example
+PDF Extractor
+
+↓
+
+Web Search Tool
+
+↓
+
+Crunchbase Tool
+
+↓
+
+Calculator
+
+↓
+
+Database Tool
+
+↓
+
+Vector Search
+These are not AI.
+These are Tools used by AI.
+LangGraph agents call these tools.
+
+Member 1
+Instead of only UI
+they build
+Visualization
+Example
+AI outputs
+Risk Score
+
+82%
+
+Reason
+
+Founder lacks domain experience
+
+Evidence
+
+Slide 12
+Frontend displays
+cards
+graphs
+timeline
+evidence
+
+Now all three contribute.
+
+Question 2
+Does AI need backend?
+Absolutely.
+Actually,
+LangGraph itself should live inside the backend.
+Architecture
+Frontend
+
+↓
+
+FastAPI
+
+↓
+
+LangGraph
+
+↓
+
+LLM
+
+↓
+
+Database
+
+↓
+
+Response
+Frontend never talks directly to Gemini/OpenAI.
+Backend does.
+
+So where does AI live?
+backend/
+
+   ai/
+
+       planner.py
+
+       graph.py
+
+       state.py
+
+       prompts.py
+
+       tools.py
+
+       memory.py
+
+       agents/
+
+           founder.py
+
+           financial.py
+
+           pitchdeck.py
+
+           market.py
+
+           risk.py
+
+           recommendation.py
+Notice
+AI is inside backend.
+Not frontend.
+
+Question 3
+Should AI be built first?
+Yes.
+Actually this is the order I'd follow.
+
+Phase 1
+Build AI without frontend.
+Input
+Pitch Deck.pdf
+Output
+Recommendation JSON
+Example
+{
+
+startup
+
+market
+
+financial
+
+risk
+
+recommendation
+
+confidence
+
+evidence
+
+}
+If this works,
+everything else becomes easy.
+
+Phase 2
+Backend API
+POST /analyze
+
+↓
+
+Returns JSON
+
+Phase 3
+Frontend
+Simply displays JSON.
+
+This reduces debugging enormously.
+
+Question 4
+GitHub Branches
+Don't worry.
+It's actually simple.
+
+Suppose repository
+CatalystAI
+Main branch
+main
+Now
+Each person creates
+their own branch.
+main
+
+│
+
+├── frontend
+
+├── backend
+
+└── ai
+
+You
+git checkout -b ai
+Now
+Everything you commit
+goes only into
+AI branch.
+
+Member 1
+git checkout -b frontend
+
+Member 3
+git checkout -b backend
+
+Now
+Nobody affects
+other people's code.
+
+Every few hours
+Push
+git push origin ai
+or
+git push origin backend
+or
+git push origin frontend
+
+Now GitHub looks like
+main
+
+frontend
+
+backend
+
+ai
+
+When AI is working
+Merge
+AI
+
+↓
+
+main
+
+When backend works
+Merge
+backend
+
+↓
+
+main
+
+When frontend works
+Merge
+frontend
+
+↓
+
+main
+
+Who merges?
+Only
+Team Leader.
+This avoids chaos.
+
+How does merging happen?
+Suppose AI completed.
+Team leader
+git checkout main
+
+git pull
+
+git merge ai
+
+git push
+Done.
+No copying files.
+Git merges automatically.
+
+What if two people edit the same file?
+Git shows
+Conflict.
+Avoid this.
+Instead
+Define ownership.
+Example
+Frontend
+
+only edits
+
+frontend/
+
+Backend
+
+only edits
+
+backend/
+
+AI
+
+only edits
+
+backend/ai/
+Nobody touches another folder.
+Almost zero conflicts.
+
+Suggested Repository Structure
+CatalystAI
+
+frontend/
+
+backend/
+
+backend/ai/
+
+backend/routes/
+
+backend/models/
+
+backend/utils/
+
+docs/
+
+sample_data/
+
+README.md
+Beautiful.
+
+Biggest mistakes hackathon teams make
+Mistake 1
+Everyone waits for backend.
+Wrong.
+Frontend can use
+Dummy JSON.
+
+Mistake 2
+Everyone waits for AI.
+Wrong.
+Backend returns
+Mock data.
+Frontend already works.
+
+Mistake 3
+Nobody defines JSON.
+Wrong.
+Define JSON first.
+Example
+{
+ "startup": "HealthAI",
+ "recommendation": "Invest",
+ "confidence": 91,
+ "risk_score": 37,
+ "market_score": 88,
+ "financial_score": 80,
+ "founder_score": 92,
+ "evidence": [
+   {
+     "agent": "Founder Agent",
+     "finding": "Founder has exited one startup successfully."
+   }
+ ]
+}
+Everything uses this.
+
+Mistake 4
+Prompt changes break frontend.
+Wrong.
+Keep JSON fixed.
+Only values change.
+
+Mistake 5
+Trying to perfect prompts.
+Wrong.
+A polished end-to-end demo beats perfect prompts with an unfinished product.
+
+My Recommended Timeline
+First 3 Hours (Everyone Together)
+This is the most important part.
+Don't write code immediately.
+Agree on:
+Folder structure
+JSON schema
+LangGraph workflow
+API contracts
+UI wireframes
+Sample input and output
+If these aren't fixed, you'll waste hours integrating later.
+
+Next 4–5 Hours (Parallel Development)
+You: Build the LangGraph graph, planner, agents, prompts, and mock outputs.
+Member 3: Build the FastAPI backend, upload endpoint, database models, and /analyze API (initially returning mock JSON).
+Member 1: Build the React UI using the agreed mock JSON.
+Everyone works independently because the interfaces are already defined.
+
+Integration (2–3 Hours)
+Replace the mock /analyze response with the real LangGraph output.
+If your JSON contract hasn't changed, the frontend won't need modifications.
+
+Polish (Final 2–3 Hours)
+Focus on demo quality:
+Loading animation ("Analyzing startup...")
+Agent execution timeline
+Evidence cards
+Confidence gauge
+Human approval screen
+Decision history
+Clean error handling
+
+One architectural improvement I'd recommend
+Since this is an Agentic AI hackathon, don't have every analysis agent run on every pitch deck.
+Instead, let your Planner Agent decide dynamically.
+For example:
+If the pitch deck has financial projections, invoke the Financial Agent.
+If founder profiles are present, invoke the Founder Agent.
+If customer traction is mentioned, invoke the Market Agent.
+If legal or compliance information is missing, invoke a Missing Information Agent.
+That demonstrates dynamic orchestration, which is one of the key judging criteria, instead of a fixed sequential pipeline. It will make your architecture feel much more "agentic" and aligned with the problem statement.
+
