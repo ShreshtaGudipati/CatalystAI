@@ -45,7 +45,8 @@ Instead of simply generating responses, CatalystAI:
 
 # Enterprise Architecture
 
-> **Insert Platform Overview Architecture Image**
+<img width="858" height="636" alt="image" src="https://github.com/user-attachments/assets/895a8d8c-7edb-4376-8bb1-05d724e86bec" />
+
 
 CatalystAI is designed as a reusable Enterprise Decision Intelligence Platform consisting of:
 
@@ -60,8 +61,8 @@ CatalystAI is designed as a reusable Enterprise Decision Intelligence Platform c
 ---
 
 # AI Core Architecture
+<img width="814" height="678" alt="image" src="https://github.com/user-attachments/assets/4d7b1d76-b2d6-4148-a46e-fe0ed2e1a13e" />
 
-> **Insert AI Orchestration Architecture Image**
 
 At the heart of CatalystAI is the **Planner Agent**, responsible for dynamically orchestrating specialized AI agents.
 
@@ -81,7 +82,7 @@ The Decision Intelligence layer consolidates all findings into a single explaina
 
 # Enterprise Decision Lifecycle
 
-> **Insert Decision Lifecycle Architecture Image**
+<img width="1023" height="604" alt="image" src="https://github.com/user-attachments/assets/a13527af-81b1-46bd-9150-2de7ae0e52e1" />
 
 CatalystAI follows an end-to-end enterprise decision workflow:
 
