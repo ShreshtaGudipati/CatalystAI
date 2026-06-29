@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { ShieldCheck, ChevronRight, FileText, CheckCircle2, AlertOctagon, HelpCircle, FileCheck, Check, CornerDownRight } from 'lucide-react';
+import { ShieldCheck, ChevronRight, FileText, CheckCircle2, AlertOctagon, HelpCircle, FileCheck, Check, CornerDownRight, RefreshCw } from 'lucide-react';
 import ConfidenceGauge from '../components/ConfidenceGauge';
 
-const DecisionCase = ({ decisionId, setActivePage }) => {
+const DecisionCase = ({ decisionId, setActivePage, setLiveAnalysisParams }) => {
   const [data, setData] = useState(null);
   const [activeTab, setActiveTab] = useState('overview');
   const [loading, setLoading] = useState(true);
@@ -62,6 +62,16 @@ const DecisionCase = ({ decisionId, setActivePage }) => {
     }
   };
 
+  const handleReRunOrchestration = () => {
+    setLiveAnalysisParams({
+      case_id: decisionId,
+      startup_name: data.startup_name,
+      industry: data.industry,
+      startup_stage: data.startup_stage || 'Seed'
+    });
+    setActivePage('live-analysis');
+  };
+
   if (loading) {
     return (
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>
@@ -116,7 +126,29 @@ const DecisionCase = ({ decisionId, setActivePage }) => {
           <p style={{ color: '#94a3b8', fontSize: '13px' }}>Industry: {data.industry} | Stage: {data.startup_stage || 'Seed'}</p>
         </div>
         
-        <ConfidenceGauge score={data.confidence_score} size={90} strokeWidth={8} />
+        <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
+          <button 
+            onClick={handleReRunOrchestration}
+            className="btn-primary" 
+            style={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              gap: '8px', 
+              padding: '10px 16px',
+              fontSize: '13px',
+              background: 'rgba(0, 240, 255, 0.1)',
+              border: '1px solid #00f0ff',
+              color: '#00f0ff',
+              cursor: 'pointer',
+              borderRadius: '4px',
+              transition: 'all 0.2s'
+            }}
+          >
+            <RefreshCw size={15} />
+            Re-run Orchestration
+          </button>
+          <ConfidenceGauge score={data.confidence_score} size={90} strokeWidth={8} />
+        </div>
       </div>
 
       {/* Tab Navigation */}

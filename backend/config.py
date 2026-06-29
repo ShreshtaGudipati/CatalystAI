@@ -1,8 +1,19 @@
 import os
+from dotenv import load_dotenv
 
 # Base Directories
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 WORKSPACE_DIR = os.path.dirname(BASE_DIR)
+
+# Load environment variables from .env
+dotenv_path = os.path.join(BASE_DIR, ".env")
+if os.path.exists(dotenv_path):
+    load_dotenv(dotenv_path)
+else:
+    load_dotenv()
+
+# API Keys
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
 # Folders to initialize
 UPLOAD_DIR = os.path.join(BASE_DIR, "uploads")
@@ -16,3 +27,4 @@ DB_PATH = os.path.join(DATABASE_DIR, "catalyst_ai.db")
 # Initialize all required folders
 for folder in [UPLOAD_DIR, REPORTS_DIR, LOGS_DIR, DATABASE_DIR]:
     os.makedirs(folder, exist_ok=True)
+

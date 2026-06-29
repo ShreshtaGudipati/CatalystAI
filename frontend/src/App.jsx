@@ -65,6 +65,7 @@ function App() {
           <DecisionCase 
             decisionId={selectedCaseId} 
             setActivePage={setActivePage} 
+            setLiveAnalysisParams={setLiveAnalysisParams}
           />
         )}
         

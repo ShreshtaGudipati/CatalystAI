@@ -1,4 +1,7 @@
 import re
+import json
+import google.generativeai as genai
+from backend.config import GEMINI_API_KEY
 from backend.ai.state import AgentState
 from backend.ai.agents.founder import find_sentences_with_keywords
 
@@ -8,6 +11,65 @@ def market_agent(state: AgentState) -> AgentState:
     startup_name = state.get("startup_name", "").strip()
     docs = state.get("uploaded_documents", {})
     
+    # 1. Try Live Gemini API
+    if GEMINI_API_KEY:
+        try:
+            genai.configure(api_key=GEMINI_API_KEY)
+            model = genai.GenerativeModel("gemini-2.5-flash")
+            
+            # Filter documents related to market
+            doc_context = ""
+            for filename, text in docs.items():
+                if any(x in filename.lower() for x in ["market", "competitor", "industry", "cagr", "tam", "customer", "research"]):
+                    doc_context += f"--- Document: {filename} ---\n{text}\n\n"
+            
+            if not doc_context and docs:
+                doc_context = "\n\n".join([f"--- Document: {k} ---\n{v}" for k, v in docs.items()])
+                
+            prompt = f"""
+            You are an expert venture capital analyst evaluating the market opportunity for a startup named "{startup_name}".
+            Analyze the following document text and provide a structured JSON evaluation of their Total Addressable Market (TAM), growth CAGR, market tailwinds, and competitive landscape.
+            
+            Document Text:
+            {doc_context}
+            
+            Your response must be a JSON object matching this schema:
+            {{
+                "score": 80, // integer from 0 to 100 representing market attractiveness
+                "summary": "Concise summary of the market size and competitive dynamics.",
+                "strengths": ["Strength 1 (e.g., Massive TAM, high CAGR)"],
+                "weaknesses": ["Weakness 1 (e.g., Intense competition, high acquisition costs)"],
+                "evidence": [
+                    {{
+                        "claim": "Specific market size or competitor claim (e.g., TAM is $18B growing at 29% CAGR)",
+                        "source_document": "The filename where this was found"
+                    }}
+                ]
+            }}
+            
+            Return ONLY the raw JSON object. Do not wrap it in markdown block formatting.
+            """
+            
+            response = model.generate_content(
+                prompt,
+                generation_config={"response_mime_type": "application/json"}
+            )
+            analysis = json.loads(response.text)
+            
+            formatted_evidence = [
+                {"claim": item["claim"], "source_document": item.get("source_document", "Market_Research_Report.pdf"), "agent": "Market Agent"}
+                for item in analysis.get("evidence", [])
+            ]
+            
+            return {
+                "market_analysis": analysis,
+                "evidence": formatted_evidence,
+                "agents_executed": ["market_agent"]
+            }
+        except Exception as e:
+            print(f"[Market Agent] Gemini API error: {e}. Falling back to heuristics.")
+
+    # 2. Fallback / Mock Logic
     if "aetherhealth" in startup_name.lower():
         analysis = {
             "score": 88,

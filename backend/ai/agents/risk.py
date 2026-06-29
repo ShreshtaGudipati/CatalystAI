@@ -1,4 +1,7 @@
 import re
+import json
+import google.generativeai as genai
+from backend.config import GEMINI_API_KEY
 from backend.ai.state import AgentState
 from backend.ai.agents.founder import find_sentences_with_keywords
 
@@ -8,6 +11,67 @@ def risk_agent(state: AgentState) -> AgentState:
     startup_name = state.get("startup_name", "").strip()
     docs = state.get("uploaded_documents", {})
     
+    # 1. Try Live Gemini API
+    if GEMINI_API_KEY:
+        try:
+            genai.configure(api_key=GEMINI_API_KEY)
+            model = genai.GenerativeModel("gemini-2.5-flash")
+            
+            # Filter documents related to risk
+            doc_context = ""
+            for filename, text in docs.items():
+                if any(x in filename.lower() for x in ["risk", "red flag", "patent", "litigation", "legal", "fda", "regulatory", "court", "compliance"]):
+                    doc_context += f"--- Document: {filename} ---\n{text}\n\n"
+            
+            if not doc_context and docs:
+                doc_context = "\n\n".join([f"--- Document: {k} ---\n{v}" for k, v in docs.items()])
+                
+            prompt = f"""
+            You are an expert venture capital risk auditor evaluating a startup named "{startup_name}".
+            Analyze the following document text and provide a structured JSON evaluation of their regulatory compliance, IP/patent status, legal risks, and operational vulnerabilities.
+            
+            Document Text:
+            {doc_context}
+            
+            Your response must be a JSON object matching this schema:
+            {{
+                "score": 70, // integer from 0 to 100 representing risk health (100 is lowest risk, 0 is highest risk)
+                "summary": "Concise summary of the risk profile.",
+                "strengths": ["Mitigating factor or strength 1 (e.g., Patent pending)"],
+                "weaknesses": ["Risk or weakness 1 (e.g., FDA pending)"],
+                "evidence": [
+                    {{
+                        "claim": "Specific risk or mitigant claim from the text",
+                        "source_document": "The filename where this was found"
+                    }}
+                ]
+            }}
+            
+            Return ONLY the raw JSON object. Do not wrap it in markdown block formatting.
+            """
+            
+            response = model.generate_content(
+                prompt,
+                generation_config={"response_mime_type": "application/json"}
+            )
+            analysis = json.loads(response.text)
+            
+            formatted_evidence = [
+                {"claim": item["claim"], "source_document": item.get("source_document", "Due_Diligence_Checklist.pdf"), "agent": "Risk Agent"}
+                for item in analysis.get("evidence", [])
+            ]
+            
+            return {
+                "risk_analysis": analysis,
+                "risks": analysis["weaknesses"],
+                "opportunities": analysis["strengths"],
+                "evidence": formatted_evidence,
+                "agents_executed": ["risk_agent"]
+            }
+        except Exception as e:
+            print(f"[Risk Agent] Gemini API error: {e}. Falling back to heuristics.")
+
+    # 2. Fallback / Mock Logic
     if "aetherhealth" in startup_name.lower():
         analysis = {
             "score": 70,  # Risk Health Score (100 - 30 severity)

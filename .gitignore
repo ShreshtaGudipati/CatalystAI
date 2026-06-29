@@ -1,0 +1,35 @@
+# Environments
+.env
+backend/.env
+.venv/
+venv/
+ENV/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+
+# Node/Frontend
+node_modules/
+dist/
+build/
+.eslintcache
+
+# Databases
+backend/database/catalyst_ai.db
+database/catalyst_ai.db
+*.db
+*.sqlite3
+
+# IDEs
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp

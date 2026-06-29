@@ -1,3 +1,6 @@
+import json
+import google.generativeai as genai
+from backend.config import GEMINI_API_KEY
 from backend.ai.state import AgentState
 
 def recommendation_agent(state: AgentState) -> AgentState:
@@ -5,14 +8,79 @@ def recommendation_agent(state: AgentState) -> AgentState:
     
     startup_name = state.get("startup_name", "").strip()
     
-    # 1. Fetch scores with safe defaults
+    # 1. Try Live Gemini API
+    if GEMINI_API_KEY:
+        try:
+            genai.configure(api_key=GEMINI_API_KEY)
+            model = genai.GenerativeModel("gemini-2.5-flash")
+            
+            # Gather all individual analysis reports
+            context = f"""
+            Startup Name: {startup_name}
+            Stage: {state.get("startup_stage", "Seed")}
+            Industry: {state.get("industry", "")}
+            
+            Pitch Deck Analysis:
+            {json.dumps(state.get("pitchdeck_analysis", {}), indent=2)}
+            
+            Founder Analysis:
+            {json.dumps(state.get("founder_analysis", {}), indent=2)}
+            
+            Financial Analysis:
+            {json.dumps(state.get("financial_analysis", {}), indent=2)}
+            
+            Market Analysis:
+            {json.dumps(state.get("market_analysis", {}), indent=2)}
+            
+            Risk Analysis:
+            {json.dumps(state.get("risk_analysis", {}), indent=2)}
+            """
+            
+            prompt = f"""
+            You are the Investment Committee Chair evaluating a startup named "{startup_name}".
+            Synthesize the individual agent reports below and make a final investment recommendation.
+            
+            Input Analyses:
+            {context}
+            
+            Your response must be a JSON object matching this schema:
+            {{
+                "recommendation": "INVEST", // Must be one of: "INVEST", "PASS", "HOLD"
+                "confidence_score": 85, // integer from 0 to 100 representing overall confidence
+                "summary": "Detailed markdown summary. Write it in three sections: ### Executive Summary, ### Why Invest (as a bulleted list), ### Why NOT Invest (Dissent Engine, listing key challenges or risks as a bulleted list).",
+                "next_best_actions": ["Action 1", "Action 2"],
+                "missing_information": ["Missing Document 1" or "None"]
+            }}
+            
+            Return ONLY the raw JSON object. Do not wrap it in markdown block formatting.
+            """
+            
+            response = model.generate_content(
+                prompt,
+                generation_config={"response_mime_type": "application/json"}
+            )
+            res = json.loads(response.text)
+            
+            return {
+                "recommendation": res.get("recommendation", "HOLD"),
+                "confidence_score": res.get("confidence_score", 70),
+                "summary": res.get("summary", "Summary of recommendation."),
+                "next_best_actions": res.get("next_best_actions", []),
+                "missing_information": res.get("missing_information", []),
+                "agents_executed": ["recommendation_agent"]
+            }
+        except Exception as e:
+            print(f"[Recommendation Agent] Gemini API error: {e}. Falling back to heuristics.")
+
+    # 2. Fallback / Mock Logic
+    # Fetch scores with safe defaults
     founder_score = state.get("founder_analysis", {}).get("score", 70)
     financial_score = state.get("financial_analysis", {}).get("score", 70)
     market_score = state.get("market_analysis", {}).get("score", 70)
     risk_score = state.get("risk_analysis", {}).get("score", 70)
     pitchdeck_score = state.get("pitchdeck_analysis", {}).get("score", 70)
     
-    # 2. Case-specific overrides to match the exact demo specs
+    # Case-specific overrides to match the exact demo specs
     if "aetherhealth" in startup_name.lower():
         rec = "INVEST"
         confidence_score = 94
