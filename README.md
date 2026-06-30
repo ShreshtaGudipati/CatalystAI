@@ -292,7 +292,6 @@ Current roadmap includes:
 
 Developed as part of the **XL Ventures AI Hackathon 2026**
 
-- **Shreshta Gudipati**
-- **Bhargavi Bathini** - [@BhargaviBathini](https://github.com/BhargaviBathini)
+
 
 
