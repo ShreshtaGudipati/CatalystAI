@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FileSearch, CheckCircle, XCircle, AlertCircle, Percent, Database, Shield, Zap, TrendingUp, BarChart2 } from 'lucide-react';
+import { API_URL } from '../config';
 
 const Dashboard = ({ setActivePage, setSelectedCaseId }) => {
   const [stats, setStats] = useState(null);
@@ -9,11 +10,11 @@ const Dashboard = ({ setActivePage, setSelectedCaseId }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const statsRes = await fetch('http://127.0.0.1:8000/analytics');
+        const statsRes = await fetch(`${API_URL}/analytics`);
         const statsData = await statsRes.json();
         setStats(statsData);
 
-        const historyRes = await fetch('http://127.0.0.1:8000/history');
+        const historyRes = await fetch(`${API_URL}/history`);
         const historyData = await historyRes.json();
         setHistory(historyData);
       } catch (err) {

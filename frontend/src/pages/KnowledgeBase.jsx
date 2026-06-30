@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BookOpen, FileText, Calendar, Search } from 'lucide-react';
+import { API_URL } from '../config';
 
 const KnowledgeBase = () => {
   const [docs, setDocs] = useState([]);
@@ -9,7 +10,7 @@ const KnowledgeBase = () => {
   useEffect(() => {
     const fetchKnowledge = async () => {
       try {
-        const res = await fetch('http://127.0.0.1:8000/knowledge');
+        const res = await fetch(`${API_URL}/knowledge`);
         const data = await res.json();
         setDocs(data);
       } catch (err) {

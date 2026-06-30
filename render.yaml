@@ -1,0 +1,29 @@
+services:
+  # 1. Backend FastAPI Service
+  - type: web
+    name: catalyst-ai-backend
+    env: python
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: uvicorn backend.app:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.12
+      - key: GEMINI_API_KEY
+        sync: false # You will enter this on the Render dashboard
+
+  # 2. Frontend React + Vite Static Site
+  - type: web
+    name: catalyst-ai-frontend
+    env: static
+    buildCommand: cd frontend && npm install && npm run build
+    publishPath: frontend/dist
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: catalyst-ai-backend
+          property: url
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html

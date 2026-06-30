@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Upload, FileText, CheckCircle2, XCircle, ArrowRight, ShieldCheck, Database, UserCheck, HelpCircle } from 'lucide-react';
+import { API_URL } from '../config';
 
 const CreateDecision = ({ setActivePage, setLiveAnalysisParams }) => {
   const [startupName, setStartupName] = useState('');
@@ -56,7 +57,7 @@ const CreateDecision = ({ setActivePage, setLiveAnalysisParams }) => {
           formData.append('files', file);
         });
 
-        const uploadRes = await fetch('http://127.0.0.1:8000/upload', {
+        const uploadRes = await fetch(`${API_URL}/upload`, {
           method: 'POST',
           body: formData
         });

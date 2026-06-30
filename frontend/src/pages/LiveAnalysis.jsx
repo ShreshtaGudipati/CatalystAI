@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Play, Check, Loader2, ArrowRight } from 'lucide-react';
+import { API_URL } from '../config';
 
 const LiveAnalysis = ({ params, setActivePage, setSelectedCaseId }) => {
   const [nodes, setNodes] = useState([
@@ -28,7 +29,7 @@ const LiveAnalysis = ({ params, setActivePage, setSelectedCaseId }) => {
       addLog("Triggering backend graph execution...");
 
       try {
-        const response = await fetch('http://127.0.0.1:8000/analyze', {
+        const response = await fetch(`${API_URL}/analyze`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({

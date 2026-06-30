@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BarChart3, TrendingUp, AlertTriangle, ShieldCheck, PieChart } from 'lucide-react';
+import { API_URL } from '../config';
 
 const Analytics = () => {
   const [stats, setStats] = useState(null);
@@ -8,7 +9,7 @@ const Analytics = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const res = await fetch('http://127.0.0.1:8000/analytics');
+        const res = await fetch(`${API_URL}/analytics`);
         const data = await res.json();
         setStats(data);
       } catch (err) {

@@ -9,6 +9,8 @@ import DecisionCase from './pages/DecisionCase';
 import MemoryCenter from './pages/MemoryCenter';
 import KnowledgeBase from './pages/KnowledgeBase';
 import Analytics from './pages/Analytics';
+import { API_URL } from './config';
+
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -90,7 +92,7 @@ function App() {
             <div style={{ marginTop: '24px', display: 'flex', flexDirection: 'column', gap: '16px', maxWidth: '400px' }}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 <label style={{ fontSize: '11px', fontWeight: 'bold', color: '#94a3b8' }}>API Server Endpoint</label>
-                <input type="text" defaultValue="http://127.0.0.1:8000" className="input-field" disabled />
+                <input type="text" defaultValue={API_URL} className="input-field" disabled />
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 <label style={{ fontSize: '11px', fontWeight: 'bold', color: '#94a3b8' }}>Reasoning Model</label>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Database, Lightbulb, UserCheck, Calendar } from 'lucide-react';
+import { API_URL } from '../config';
 
 const MemoryCenter = () => {
   const [memories, setMemories] = useState([]);
@@ -8,7 +9,7 @@ const MemoryCenter = () => {
   useEffect(() => {
     const fetchMemories = async () => {
       try {
-        const res = await fetch('http://127.0.0.1:8000/memory');
+        const res = await fetch(`${API_URL}/memory`);
         const data = await res.json();
         setMemories(data);
       } catch (err) {

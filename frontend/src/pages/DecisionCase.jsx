@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ShieldCheck, ChevronRight, FileText, CheckCircle2, AlertOctagon, HelpCircle, FileCheck, Check, CornerDownRight, RefreshCw } from 'lucide-react';
 import ConfidenceGauge from '../components/ConfidenceGauge';
+import { API_URL } from '../config';
 
 const DecisionCase = ({ decisionId, setActivePage, setLiveAnalysisParams }) => {
   const [data, setData] = useState(null);
@@ -15,7 +16,7 @@ const DecisionCase = ({ decisionId, setActivePage, setLiveAnalysisParams }) => {
 
   const fetchDetails = async () => {
     try {
-      const res = await fetch(`http://127.0.0.1:8000/decision/${decisionId}`);
+      const res = await fetch(`${API_URL}/decision/${decisionId}`);
       const detail = await res.json();
       setData(detail);
       
@@ -42,7 +43,7 @@ const DecisionCase = ({ decisionId, setActivePage, setLiveAnalysisParams }) => {
     e.preventDefault();
     setSubmitting(true);
     try {
-      const res = await fetch('http://127.0.0.1:8000/approve', {
+      const res = await fetch(`${API_URL}/approve`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
