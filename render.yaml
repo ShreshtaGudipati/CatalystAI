@@ -12,8 +12,9 @@ services:
         sync: false # You will enter this on the Render dashboard
 
   # 2. Frontend React + Vite Static Site
-  - type: static
+  - type: web
     name: catalyst-ai-frontend
+    runtime: static
     buildCommand: cd frontend && npm install && npm run build
     staticPublishPath: frontend/dist
     envVars:
